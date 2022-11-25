@@ -7,11 +7,10 @@ const Signup = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserInfo } = useContext(AuthContext);
 
 
     const handleSignUp = data => {
-        console.log(data);
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
