@@ -5,6 +5,7 @@ const Category = ({ category }) => {
 
     const { image, heading, description } = category;
 
+
     return (
         <Link to={`/categories/${heading}`}>
             <div className="card card-side shadow-xl bg-primary text-white py-12 px-6">

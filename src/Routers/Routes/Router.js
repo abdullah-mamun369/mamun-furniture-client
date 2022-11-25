@@ -1,5 +1,7 @@
 
+import Login from "../../Pages/Login/Login";
 import Products from "../../Pages/Products/Products";
+import SignUp from "../../Pages/SignUp/SignUp";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -19,9 +21,20 @@ const router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/categories/:id',
-                element: <Products></Products>
-            }
+                path: '/categories/:category',
+                element: <Products></Products>,
+                loader: async ({ params }) => {
+                    return fetch(`http://localhost:7000/categories/${params.category}`);
+                },
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
+                path: 'signup',
+                element: <SignUp></SignUp>
+            },
         ]
     }
 ])
