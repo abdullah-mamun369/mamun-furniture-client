@@ -1,23 +1,70 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Signup = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
+    const [signUpError, setSignUpError] = useState("");
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+
     const { createUser, updateUserInfo } = useContext(AuthContext);
 
 
     const handleSignUp = data => {
+        setSignUpError('')
         createUser(data.email, data.password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
+                if (result.user) {
+                    toast.success('Success')
+                }
+
+                const userInfo = {
+                    displayName: data.name,
+                    photoUrl: data.photoUrl
+                }
+
+                updateUserInfo(userInfo)
+                    .then(() => {
+                        storeUser(data.name, data.email)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    })
+
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                setSignUpError(error.message)
+            });
     }
+
+    const storeUser = (name, email) => {
+        const user = {
+            name,
+            email
+        };
+
+        fetch('https://final-server-one.vercel.app/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.log(error))
+    }
+
 
     return (
         <div className='h-screen w-screen flex justify-center items-center'>

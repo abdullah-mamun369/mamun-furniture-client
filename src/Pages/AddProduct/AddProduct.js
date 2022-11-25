@@ -1,7 +1,19 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const AddProduct = () => {
+
+    const { user } = useContext(AuthContext);
+
+    /*
+    user,
+        createUser,
+        signIn,
+        updateUserInfo,
+        logOut,
+        loader
+    */
 
     const todayDate = new Date();
     const postDate = format(todayDate, 'PP')
@@ -27,23 +39,36 @@ const AddProduct = () => {
 
         const product = {
             name: name,
-            seller:
-                email:
-            image:
-                condition:
-            postDate:
-                phone:
-            pickLocation:
-                description:
-            yearOfPurchase:
-                resalePrice:
-            category:
-                status:
-            adStatus:
-                verifySeller:
-            originalPrice:
-                yearsOfUse:
+            seller: user.displayName,
+            email: user.email,
+            image,
+            condition,
+            postDate,
+            phone,
+            pickLocation,
+            description,
+            yearOfPurchase,
+            resalePrice,
+            category,
+            status: 'available',
+            adStatus: 'false',
+            verifySeller: '',
+            originalPrice,
+            yearsOfUse,
         }
+
+        fetch('http://localhost:7000/products', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.log(error))
     }
 
     return (
