@@ -38,6 +38,3 @@ const Product = ({ product }) => {
 };
 
 export default Product;
-
-
-// Private Route:  Category page will contain every item under that category. Product card should include 1. Pic 2. Name 3. Location/PickUpPoint 4. ResalePrice 5. OriginalPrice 6. YearsOfUse 7. PostTime 8. SellerName 9. VerifiedSeller <BookNowButton> 

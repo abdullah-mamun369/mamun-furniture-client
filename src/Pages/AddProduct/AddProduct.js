@@ -57,7 +57,7 @@ const AddProduct = () => {
             yearsOfUse,
         }
 
-        fetch('http://localhost:7000/products', {
+        fetch('https://furniture-server.vercel.app/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
