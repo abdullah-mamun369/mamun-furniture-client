@@ -51,7 +51,7 @@ const AddProduct = () => {
             resalePrice,
             category,
             status: 'available',
-            adStatus: 'false',
+            adStatus: true,
             verifySeller: '',
             originalPrice,
             yearsOfUse,

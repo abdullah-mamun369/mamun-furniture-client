@@ -45,10 +45,12 @@ const Signup = () => {
             });
     }
 
-    const storeUser = (name, email) => {
+    const storeUser = (name, email, userRole) => {
         const user = {
             name,
-            email
+            email,
+            userRole,
+            verified: false
         };
 
         fetch('https://final-server-one.vercel.app/users', {
@@ -81,6 +83,17 @@ const Signup = () => {
                             })}
                             className='input input-bordered w-full' />
                         {errors.name && <p className='text-red-600 mt-2' role="alert">{errors.name?.message}</p>}
+                    </div>
+                    <div className='py-3'>
+                        <label className="label">
+                            <span className="label-text text-xl">Register As</span>
+                        </label>
+                        <select {...register("userRole", { required: 'This Field is required' })} className="select select-bordered w-full" placeholder='Register as...'>
+                            {/* <option value="">Register as...</option> */}
+                            <option value="Buyer">Buyer</option>
+                            <option value="Seller">Seller</option>
+                        </select>
+                        {errors.userRole && <p className='text-right text-red-600 my-1 text-xs'>{errors.userRole?.message}</p>}
                     </div>
                     <div>
                         <label className="label">
