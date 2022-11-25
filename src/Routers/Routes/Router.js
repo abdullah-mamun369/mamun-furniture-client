@@ -1,4 +1,5 @@
 
+import AddProduct from "../../Pages/AddProduct/AddProduct";
 import Login from "../../Pages/Login/Login";
 import Products from "../../Pages/Products/Products";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: 'signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: 'addproduct',
+                element: <AddProduct></AddProduct>
             },
         ]
     }
