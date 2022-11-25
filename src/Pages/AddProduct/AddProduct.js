@@ -52,7 +52,7 @@ const AddProduct = () => {
             category,
             status: 'available',
             adStatus: true,
-            verifySeller: '',
+            verifySeller: 'true',
             originalPrice,
             yearsOfUse,
         }
