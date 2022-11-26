@@ -1,10 +1,7 @@
-
-import AddProduct from "../../Pages/AddProduct/AddProduct";
-import AdminDashBoard from "../../Pages/AdminDashboard/AdminDashBoard";
-import BuyerDashboard from "../../Pages/BuyerDashboard/BuyerDashboard";
 import Login from "../../Pages/Login/Login";
 import Products from "../../Pages/Products/Products";
-import SellerDashoard from "../../Pages/SellerDashboard/SellerDashoard";
+import AddProduct from "../../Pages/SellerDashboard/AddProduct";
+import MyProducts from "../../Pages/SellerDashboard/MyProducts";
 import SignUp from "../../Pages/SignUp/SignUp";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -44,17 +41,10 @@ const router = createBrowserRouter([
                 element: <AddProduct></AddProduct>
             },
             {
-                path: '/seller/dashboard',
-                element: <SellerDashoard></SellerDashoard>
+                path: '/myproducts',
+                element: <MyProducts></MyProducts>
             },
-            {
-                path: '/buyer/dashboard',
-                element: <BuyerDashboard></BuyerDashboard>
-            },
-            {
-                path: '/admin/dashboard',
-                element: <AdminDashBoard></AdminDashBoard>
-            },
+
         ]
     }
 ])

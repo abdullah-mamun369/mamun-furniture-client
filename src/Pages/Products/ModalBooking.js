@@ -71,11 +71,11 @@ const ModalBooking = ({ product }) => {
                         </div>
                         <div>
                             <label className="label"><span className="label-text">Meeting Location</span></label>
-                            <input name="meetingLocation" type="text" className="input input-bordered w-full" />
+                            <input name="meetingLocation" type="text" className="input input-bordered w-full" required />
                         </div>
                         <div>
                             <label className="label"><span className="label-text">Phone Number</span></label>
-                            <input name="phoneNumber" type="number" className="input input-bordered w-full" />
+                            <input name="phoneNumber" type="number" className="input input-bordered w-full" required />
                         </div>
                         <button className='btn border-none btn-primary text-white'>Submit</button>
                     </form>
