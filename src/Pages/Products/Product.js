@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsPatchCheckFill } from "react-icons/bs";
+import ModalBooking from './ModalBooking';
 
 const Product = ({ product }) => {
 
@@ -32,6 +33,12 @@ const Product = ({ product }) => {
                     <p><span className=' font-semibold'>Original Price:</span> {originalPrice}tk</p>
                     <p><span className=' font-semibold'>Years of use:</span> {yearsOfUse}</p>
                 </div>
+
+                {/* The button to open modal */}
+                <label htmlFor="booking-modal" className="btn">open modal</label>
+                <ModalBooking
+                    product={product}
+                ></ModalBooking>
             </div>
         </div >
     );
