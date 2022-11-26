@@ -7,6 +7,7 @@ import './Navbar.css'
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext)
+    // console.log(user);
 
     const menuItem = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
@@ -15,6 +16,19 @@ const Navbar = () => {
 
         <li><Link to='/reviews'>Reviews</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
+        <li tabIndex={0}>
+            <Link>
+                Seller-D
+                <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24 "><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+            </Link>
+            <ul className="p-2 bg-base-100 rounded-md shadow-xl">
+                <li><Link>Add Product</Link></li>
+                <li><Link>My Products</Link></li>
+                <li><Link>My Buyers</Link></li>
+            </ul>
+        </li>
+        {/* <li><Link to='/buyer/dashboard'>Buyer-D</Link></li> */}
+        {/* <li><Link to='/admin/dashboard'>Admin-D</Link></li> */}
         {
             user ?
                 <li onClick={() => { logOut() }}><Link>Log Out</Link></li>
