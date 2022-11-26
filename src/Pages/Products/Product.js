@@ -15,7 +15,7 @@ const Product = ({ product }) => {
                     <h1 className='text-3xl font-bold text-primary'>{resalePrice}tk</h1>
                 </div>
 
-                <img src={image} alt="" className="rounded-xl" />
+                <img src={image} alt="" className="rounded-xl h-[320px]" />
 
                 <p className='badge badge-primary text-white mt-3'>Condition: {condition}</p>
 
