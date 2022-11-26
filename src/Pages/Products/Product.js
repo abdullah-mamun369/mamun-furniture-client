@@ -35,7 +35,7 @@ const Product = ({ product }) => {
                 </div>
 
                 {/* The button to open modal */}
-                <label htmlFor="booking-modal" className="btn">open modal</label>
+                <label htmlFor="booking-modal" className="btn btn-primary mt-5 text-white">Book Now</label>
                 <ModalBooking
                     product={product}
                 ></ModalBooking>

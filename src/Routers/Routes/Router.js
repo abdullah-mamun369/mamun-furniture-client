@@ -17,7 +17,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 loader: async () => {
-                    return fetch('https://furniture-server.vercel.app/categories');
+                    return fetch('http://localhost:7000/categories');
                 },
                 element: <Home></Home>
             },
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
                 path: '/categories/:category',
                 element: <Products></Products>,
                 loader: async ({ params }) => {
-                    return fetch(`https://furniture-server.vercel.app/categories/${params.category}`);
+                    return fetch(`http://localhost:7000/categories/${params.category}`);
                 },
             },
             {
