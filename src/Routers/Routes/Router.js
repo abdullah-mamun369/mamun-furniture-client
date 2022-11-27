@@ -1,3 +1,6 @@
+import AllBuyers from "../../Pages/AdminDashboard/AllBuyers";
+import AllSellers from "../../Pages/AdminDashboard/AllSellers";
+import ReportedItems from "../../Pages/AdminDashboard/ReportedItems";
 import Login from "../../Pages/Login/Login";
 import Products from "../../Pages/Products/Products";
 import AddProduct from "../../Pages/SellerDashboard/AddProduct";
@@ -43,6 +46,18 @@ const router = createBrowserRouter([
             {
                 path: '/myproducts',
                 element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/allsellers',
+                element: <AllSellers></AllSellers>
+            },
+            {
+                path: '/allbuyers',
+                element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/reported',
+                element: <ReportedItems></ReportedItems>
             },
 
         ]

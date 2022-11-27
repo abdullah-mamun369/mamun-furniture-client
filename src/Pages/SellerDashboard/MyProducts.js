@@ -14,7 +14,7 @@ const MyProducts = () => {
     const { data: myProducts = [], isLoading } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:7000/products/?email=${user?.email}`);
+            const res = await fetch(`http://localhost:7000/productsbyemail/?email=${user?.email}`);
             const data = await res.json();
             return data
         }
@@ -23,37 +23,30 @@ const MyProducts = () => {
 
     return (
         <div className='mt-24 container mx-auto'>
-            <div>
-                <img className='w-full' src={banner1} alt="" />
+            <div className="overflow-x-auto w-full">
+                <table className="table w-full">
+                    {/* <!-- head --> */}
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Product Status</th>
+                            <th>Create Ads</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            myProducts.map((myProduct, i) => <MyProductList
+                                key={myProduct._id}
+                                product={myProduct}
+                                i={i}
+                            ></MyProductList>)
+                        }
+                    </tbody>
+                </table>
             </div>
-            <div className='mt-16'>
-                <div className="overflow-x-auto w-full">
-                    <table className="table w-full">
-                        {/* <!-- head --> */}
-                        <thead>
-                            <tr>
-
-                                <th>No</th>
-                                <th>Product Name</th>
-                                <th>Product Status</th>
-                                <th>Create Ads</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                myProducts.map((myProduct, i) => <MyProductList
-                                    key={myProduct._id}
-                                    product={myProduct}
-                                    i={i}
-                                ></MyProductList>)
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div></div>
         </div>
     );
 };

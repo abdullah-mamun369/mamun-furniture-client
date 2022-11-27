@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const MyProductList = ({ product, i }) => {
 
-    const { image, name, category } = product;
+    const { image, name, category, resalePrice } = product;
     // console.log("rnq checking", product);
 
     return (
@@ -24,10 +24,13 @@ const MyProductList = ({ product, i }) => {
                 </div>
             </td>
             <td>
+                <div className="text-sm">{resalePrice}</div>
+            </td>
+            <td>
                 <button className="btn btn-ghost btn-xs">Available</button>
             </td>
             <td>
-                <button className="btn btn-ghost btn-xs">Advertise</button>
+                <button className="btn btn-primary btn-xs text-white">Advertise</button>
             </td>
             <th>
                 <Link className=""><AiFillDelete color="red" fontSize="30px" /></Link>
