@@ -41,6 +41,7 @@ const MyProducts = () => {
                             myProducts.map((myProduct, i) => <MyProductList
                                 key={myProduct._id}
                                 product={myProduct}
+                                myProducts={myProducts}
                                 i={i}
                             ></MyProductList>)
                         }

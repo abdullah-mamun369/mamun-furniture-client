@@ -2,10 +2,28 @@ import React from 'react';
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
-const MyProductList = ({ product, i }) => {
+const MyProductList = ({ product, i, myProducts }) => {
 
-    const { image, name, category, resalePrice } = product;
+    const { _id, image, name, category, resalePrice, status } = product;
     // console.log("rnq checking", product);
+
+    const handleDelete = id => {
+        const proceed = window.confirm('Are you sure, you want to cancel this order');
+        if (proceed) {
+            fetch(`http://localhost:7000/products/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.deletedCount > 0) {
+                        alert('deleted successfully');
+                        const remainingProducts = myProducts.filter(itm => itm._id !== id);
+                        myProducts(remainingProducts);
+                    }
+                })
+        }
+    }
 
     return (
         <tr>
@@ -27,13 +45,13 @@ const MyProductList = ({ product, i }) => {
                 <div className="text-sm">{resalePrice}</div>
             </td>
             <td>
-                <button className="btn btn-ghost btn-xs">Available</button>
+                <button className="btn btn-ghost btn-xs">{status ? status : 'Available'}</button>
             </td>
             <td>
                 <button className="btn btn-primary btn-xs text-white">Advertise</button>
             </td>
             <th>
-                <Link className=""><AiFillDelete color="red" fontSize="30px" /></Link>
+                <Link onClick={() => handleDelete(_id)} className=""><AiFillDelete color="red" fontSize="30px" /></Link>
             </th>
         </tr>
     );
