@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const AddProduct = () => {
@@ -50,9 +51,9 @@ const AddProduct = () => {
             yearOfPurchase,
             resalePrice,
             category,
-            status: 'available',
-            adStatus: true,
-            verifySeller: 'true',
+            status: true,
+            adStatus: false,
+            verifySeller: false,
             originalPrice,
             yearsOfUse,
         }
@@ -66,7 +67,10 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.acknowledged) {
+                    toast.success("🦄 The Product is successfully added", { autoClose: 5000, });
+                    e.target.reset();
+                }
             })
             .catch(error => console.log(error))
     }

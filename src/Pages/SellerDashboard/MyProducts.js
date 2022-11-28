@@ -11,7 +11,7 @@ const MyProducts = () => {
 
 
 
-    const { data: myProducts = [], isLoading } = useQuery({
+    const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:7000/productsbyemail/?email=${user?.email}`);
@@ -43,6 +43,7 @@ const MyProducts = () => {
                                 product={myProduct}
                                 myProducts={myProducts}
                                 i={i}
+                                refetch={refetch}
                             ></MyProductList>)
                         }
                     </tbody>

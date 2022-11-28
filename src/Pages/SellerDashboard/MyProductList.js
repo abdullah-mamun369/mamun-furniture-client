@@ -1,13 +1,14 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
-const MyProductList = ({ product, i, myProducts }) => {
+const MyProductList = ({ product, i, myProducts, refetch }) => {
 
-    const { _id, image, name, category, resalePrice, status } = product;
+    const { _id, image, name, category, resalePrice, status, adStatus } = product;
     // console.log("rnq checking", product);
 
-    // Delete Product==============================================================
+    // Status Product==============================================================
     const handleStatusUpdate = id => {
         const proceed = window.confirm('Are you sure, the Product is sold?');
         if (proceed) {
@@ -15,19 +16,14 @@ const MyProductList = ({ product, i, myProducts }) => {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',
-                    // authorization: `Bearer ${localStorage.getItem('genius-token')}`
                 },
-                body: JSON.stringify({ status: 'Sold' })
+                body: JSON.stringify({ status: !status })
             })
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
                     if (data.modifiedCount > 0) {
-                        const remaining = myProducts.filter(odr => odr._id !== id);
-                        const approving = myProducts.find(odr => odr._id === id);
-                        approving.status = 'Sold'
-
-                        const newProducts = [approving, ...remaining];
+                        toast.success(' 🦄 The Product is marked as sold')
                         window.location.reload(true);
                     }
                 })
@@ -55,6 +51,28 @@ const MyProductList = ({ product, i, myProducts }) => {
         }
     }
 
+    // Advertise Product=========================================================
+    const handleAdvertise = (id, status) => {
+        const proceed = window.confirm('Do you want advertise your product in the front page?');
+
+        if (proceed) {
+            fetch(`http://localhost:7000/advertise/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ adStatus: !status })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        toast.success('Product is now featured in the homepage!');
+                    }
+                })
+        }
+    }
+
+
     return (
         <tr>
             <th>{i + 1}</th>
@@ -75,11 +93,22 @@ const MyProductList = ({ product, i, myProducts }) => {
                 <div className="text-sm">{resalePrice}</div>
             </td>
             <td>
-                <button onClick={() => handleStatusUpdate(_id)} className="btn btn-ghost btn-xs">{status ? status : 'Available'}</button>
+                {
+                    status === true ?
+                        <button onClick={() => handleStatusUpdate(_id, status)} className="btn btn-ghost btn-xs">Available</button>
+                        :
+                        <button className="btn btn-ghost btn-xs" disabled>Sold</button>
+
+                }
+
             </td>
             <td>
-
-                <button className="btn btn-primary btn-xs text-white" disabled={status && "disabled"}>Advertise</button>
+                {
+                    status === true && adStatus === false ?
+                        <button onClick={() => { handleAdvertise(_id, adStatus) }} className="btn btn-primary btn-xs text-white">Advertise</button>
+                        :
+                        <button className="btn btn-primary btn-xs text-white" disabled>Advertise</button>
+                }
             </td>
             <th>
                 <Link onClick={() => handleDelete(_id)} className=""><AiFillDelete color="red" fontSize="30px" /></Link>
