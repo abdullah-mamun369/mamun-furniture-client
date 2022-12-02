@@ -19,7 +19,7 @@ const Signup = () => {
 
     const handleSignUp = data => {
         setSignUpError('')
-        createUser(data.email, data.password)
+        createUser(data.email, data.password, data.userRole)
             .then(result => {
                 if (result.user) {
                     toast.success('Success')
@@ -27,12 +27,13 @@ const Signup = () => {
 
                 const userInfo = {
                     displayName: data.name,
-                    photoUrl: data.photoUrl
+                    photoUrl: data.photoUrl,
+                    role: data.userRole
                 }
 
                 updateUserInfo(userInfo)
                     .then(() => {
-                        storeUser(data.name, data.email)
+                        storeUser(data.name, data.email, data.userRole)
                     })
                     .catch(err => {
                         console.error(err);
@@ -51,7 +52,8 @@ const Signup = () => {
             email,
             userRole,
             verified: false
-        };
+        }
+        console.log("the rol is ", userRole)
 
         fetch('https://furniture-server.vercel.app/users', {
             method: 'POST',

@@ -8,6 +8,8 @@ import AddProduct from "../../Pages/SellerDashboard/AddProduct";
 import MyProducts from "../../Pages/SellerDashboard/MyProducts";
 import SignUp from "../../Pages/SignUp/SignUp";
 import error404 from "../../assets/404.jpg"
+import MyBookings from "../../Pages/BuyerDashboard/MyBookings";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 
 
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/categories/:category',
-                element: <Products></Products>,
+                element: <PrivateRoutes><Products></Products></PrivateRoutes>,
                 loader: async ({ params }) => {
                     return fetch(`https://furniture-server.vercel.app/categories/${params.category}`);
                 },
@@ -46,27 +48,39 @@ const router = createBrowserRouter([
             },
             {
                 path: '/addproduct',
-                element: <AddProduct></AddProduct>
+                element: <PrivateRoutes><AddProduct></AddProduct></PrivateRoutes>
             },
             {
                 path: '/myproducts',
-                element: <MyProducts></MyProducts>
+                element: <PrivateRoutes><MyProducts></MyProducts></PrivateRoutes>
             },
             {
                 path: '/allsellers',
-                element: <AllSellers></AllSellers>
+                element: <PrivateRoutes><AllSellers></AllSellers></PrivateRoutes>
             },
             {
                 path: '/allbuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <PrivateRoutes><AllBuyers></AllBuyers></PrivateRoutes>
             },
             {
                 path: '/reported',
-                element: <ReportedItems></ReportedItems>
+                element: <PrivateRoutes><ReportedItems></ReportedItems></PrivateRoutes>
             },
             {
                 path: '/blog',
                 element: <Blog></Blog>
+            },
+            {
+                path: '/mybookings',
+                element: <PrivateRoutes><MyBookings></MyBookings></PrivateRoutes>
+            },
+            {
+                path: '/buyers',
+                element: <PrivateRoutes><AllBuyers></AllBuyers></PrivateRoutes>
+            },
+            {
+                path: '/sellers',
+                element: <PrivateRoutes><AllSellers></AllSellers></PrivateRoutes>
             },
 
         ]

@@ -1,11 +1,13 @@
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const AddProduct = () => {
 
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     /*
     user,
@@ -70,13 +72,14 @@ const AddProduct = () => {
                 if (data.acknowledged) {
                     toast.success("🦄 The Product is successfully added", { autoClose: 5000, });
                     e.target.reset();
+                    navigate('/myproducts')
                 }
             })
             .catch(error => console.log(error))
     }
 
     return (
-        <div className='container mx-auto mt-24 lg:w-6/12 w-9/12'>
+        <div className='container mx-auto mt-24 lg:w-6/12 w-9/12 mb-12'>
             <form onSubmit={handleBooking} className='mt-10 grid grid-cols-1 gap-4'>
                 <input name="name" type="text" placeholder="Product Name" className="input input-bordered w-full" />
                 <input name="image" type="text" placeholder="Place your product image link" className="input input-bordered w-full" />

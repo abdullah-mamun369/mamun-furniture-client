@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
     const loaction = useLocation();
 
-    const from = loaction.state?.from?.pathname || '/';
+    // const from = loaction.state?.from?.pathname || '/';
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
@@ -20,7 +20,9 @@ const Login = () => {
         console.log(data);
         signIn(data.email, data.password)
             .then(result => {
+
                 const user = result.user;
+                navigate('/')
                 console.log(user);
             })
             .catch(error => console.error(error));
@@ -34,7 +36,7 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
             .then(result => {
-                navigate(from, { replace: true })
+                navigate('/')
             })
             .catch(error => {
                 console.error(error);

@@ -1,27 +1,67 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.png'
+import Spinner from '../../../Components/Spinner/Spinner';
 import { AuthContext } from '../../../Context/AuthProvider';
+import { useUserVerify } from '../../../Hooks/useUserVerify';
 import './Navbar.css'
 
 const Navbar = () => {
 
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut, loader } = useContext(AuthContext);
+
+    if (loader) {
+        <Spinner></Spinner>
+    }
+
+    const [isSeller, isBuyer, isAdmin, isUserLoading] = useUserVerify(user);
     // console.log(user);
 
     const menuItem = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
-        <li tabIndex={0}>
-            <Link>
-                Seller-Dashboard
-                <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24 "><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
-            </Link>
-            <ul className="p-2 bg-base-100 rounded-md shadow-xl">
-                <li><Link to='/addproduct'>Add Product</Link></li>
-                <li><Link to='/myproducts'>My Products</Link></li>
-            </ul>
-        </li>
+
+        {/* seller Dashboard===================================== */}
+        {
+            isSeller &&
+            <li tabIndex={0}>
+                <Link>
+                    Seller-Dashboard
+                    <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24 "><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+                </Link>
+                <ul className="p-2 bg-base-100 rounded-md shadow-xl">
+                    <li><Link to='/addproduct'>Add Product</Link></li>
+                    <li><Link to='/myproducts'>My Products</Link></li>
+                </ul>
+            </li>}
+
+        {/* Buyer Dashboard===================================== */}
+        {
+            isBuyer &&
+            <li tabIndex={0}>
+                <Link>
+                    Buyer-Dashboard
+                    <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24 "><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+                </Link>
+                <ul className="p-2 bg-base-100 rounded-md shadow-xl">
+                    <li><Link to='/mybookings'>My Booking</Link></li>
+                    <li><Link to='/mywishlist'>My Wishlist</Link></li>
+                </ul>
+            </li>}
+
+        {/* Admin Dashboard===================================== */}
+        {
+            isAdmin &&
+            <li tabIndex={0}>
+                <Link>
+                    Admin-Dashboard
+                    <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24 "><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+                </Link>
+                <ul className="p-2 bg-base-100 rounded-md shadow-xl">
+                    <li><Link to='/buyers'>All Buyers</Link></li>
+                    <li><Link to='/sellers'>All Sellers</Link></li>
+                </ul>
+            </li>}
         {
             user ?
                 <li onClick={() => { logOut() }}><Link>Log Out</Link></li>
