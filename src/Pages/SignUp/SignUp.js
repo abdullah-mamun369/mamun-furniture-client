@@ -53,7 +53,7 @@ const Signup = () => {
             verified: false
         };
 
-        fetch('http://localhost:7000/users', {
+        fetch('https://furniture-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

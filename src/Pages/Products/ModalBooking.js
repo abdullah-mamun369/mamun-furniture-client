@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const ModalBooking = ({ product }) => {
@@ -29,7 +30,7 @@ const ModalBooking = ({ product }) => {
         }
         console.log(myBooking);
 
-        fetch('http://localhost:7000/mybooking', {
+        fetch('https://furniture-server.vercel.app/mybooking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -38,7 +39,10 @@ const ModalBooking = ({ product }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.acknowledged) {
+                    toast.success("🦄 Congratulations! Your Booking is completed", { autoClose: 5000, });
+                    e.target.reset();
+                }
             })
             .catch(error => console.log(error))
 

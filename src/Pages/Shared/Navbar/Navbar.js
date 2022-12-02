@@ -11,14 +11,10 @@ const Navbar = () => {
 
     const menuItem = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/appointment'>Appointment</Link></li>
-
-        <li><Link to='/reviews'>Reviews</Link></li>
-        <li><Link to='/contact'>Contact Us</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
         <li tabIndex={0}>
             <Link>
-                Seller-D
+                Seller-Dashboard
                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24 "><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
             </Link>
             <ul className="p-2 bg-base-100 rounded-md shadow-xl">
@@ -26,7 +22,6 @@ const Navbar = () => {
                 <li><Link to='/myproducts'>My Products</Link></li>
             </ul>
         </li>
-
         {
             user ?
                 <li onClick={() => { logOut() }}><Link>Log Out</Link></li>

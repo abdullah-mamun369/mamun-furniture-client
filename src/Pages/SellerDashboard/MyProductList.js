@@ -12,7 +12,7 @@ const MyProductList = ({ product, i, myProducts, refetch }) => {
     const handleStatusUpdate = id => {
         const proceed = window.confirm('Are you sure, the Product is sold?');
         if (proceed) {
-            fetch(`http://localhost:7000/products/${id}`, {
+            fetch(`https://furniture-server.vercel.app/products/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',
@@ -36,7 +36,7 @@ const MyProductList = ({ product, i, myProducts, refetch }) => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to cancel this order');
         if (proceed) {
-            fetch(`http://localhost:7000/products/${id}`, {
+            fetch(`https://furniture-server.vercel.app/products/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -56,7 +56,7 @@ const MyProductList = ({ product, i, myProducts, refetch }) => {
         const proceed = window.confirm('Do you want advertise your product in the front page?');
 
         if (proceed) {
-            fetch(`http://localhost:7000/advertise/${id}`, {
+            fetch(`https://furniture-server.vercel.app/advertise/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'
