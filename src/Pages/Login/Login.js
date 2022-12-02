@@ -1,13 +1,20 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { BsGoogle } from 'react-icons/bs';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
 
+    const navigate = useNavigate();
+    const loaction = useLocation();
+
+    const from = loaction.state?.from?.pathname || '/';
+
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
 
     const handleLogin = data => {
         console.log(data);
@@ -17,6 +24,22 @@ const Login = () => {
                 console.log(user);
             })
             .catch(error => console.error(error));
+    }
+
+
+
+    // login with google handle
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error);
+                // setError(error.message)
+            })
     }
 
     return (
@@ -51,11 +74,13 @@ const Login = () => {
                     </div>
                     {/* <p>{data}</p> */}
                     <button className='btn btn-primary text-white w-full'>Login</button>
-                    <p className='text-center font-semibold'>New to Doctors Portal? <Link to='/signup' className='text-primary'> Create new account</Link> </p>
+                    <p className='text-center font-semibold'>New to Mamun's Furniture? <Link to='/signup' className='text-primary'> Create new account</Link> </p>
                     <div className="divider">OR</div>
 
                 </form>
-                <button className='btn btn-outline btn-secondary text-white w-full'>Continue with google</button>
+                <div className="form-control mt-2">
+                    <button onClick={handleGoogleSignIn} className="btn btn-outline"> <span className='mx-2'> <BsGoogle /></span> Login with Google</button>
+                </div>
             </div>
         </div>
 
